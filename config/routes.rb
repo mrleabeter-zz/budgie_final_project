@@ -1,4 +1,6 @@
 Budgie::Application.routes.draw do
+  resources :categories
+
   resources :discounts
 
   resources :companies
