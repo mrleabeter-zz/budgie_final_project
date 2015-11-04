@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company_id: 
+  user_id: 
+  discount_percent: 1
+  restrictions: MyString
+
+two:
+  company_id: 
+  user_id: 
+  discount_percent: 1
+  restrictions: MyString
