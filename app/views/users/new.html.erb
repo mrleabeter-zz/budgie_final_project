@@ -33,28 +33,24 @@
     <%= user_form.label :city %><br>
     <%= user_form.text_field :city %>
   </div>
-
-  <%= user_form.fields_for :discounts, (discount = @user.discounts.new) do |discount_field| %>
-   
+  
+  <%= fields_for(@company) do |co| %>
     <div class="field">
-      <%= discount_field.label :discount_percent %><br>
-      <%= discount_field.text_field :discount_percent %>
+      <%= co.label :company_name %><br>
+      <%= co.text_field :company_name %>
     </div>
+  <% end %>
 
+  <%= fields_for(@discount) do |di| %>
     <div class="field">
-      <%= discount_field.label :restrictions %><br>
-      <%= discount_field.text_field :restrictions %>
+      <%= di.label :discount_percent %><br>
+      <%= di.text_field :discount_percent %>
     </div>
-
-    <!-- discount_field.fields_for discount_field.object.build_company do |company_field| -->
-    <%= discount_field.fields_for :company, discount.build_company do |company_field| %>
-      <div class="field">
-        <%= company_field.label :company_name %><br>
-        <%= company_field.text_field :company_name %>
-      </div> 
-    
-    <% end %>
-  <% end %> 
+    <div class="field">
+      <%= di.label :restrictions %><br>
+      <%= di.text_field :restrictions %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= user_form.submit %>

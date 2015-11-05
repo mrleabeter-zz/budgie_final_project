@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   
   has_many :discounts
-  accepts_nested_attributes_for :discounts
 
    validates :username,
                presence: true,

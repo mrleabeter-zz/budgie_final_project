@@ -15,8 +15,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    # discount = @user.discounts.new
-    # company = discount.build_company
+    @company = Company.new
+    @discount = Discount.new
   end
 
   # GET /users/1/edit
@@ -26,8 +26,10 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    binding.pry
     @user = User.new(user_params)
-
+    @user.save
+    create_helper(@user.id)
 
     respond_to do |format|
       if @user.save
@@ -79,5 +81,25 @@ class UsersController < ApplicationController
           ]
         ]
       )
+    end
+
+    def create_helper(id)
+      existing_company = Company.find_by(company_name: params[:company][:company_name])
+      if existing_company != nil
+        @company = existing_company
+      else
+        @company = Company.new(
+          company_name: params[:company][:company_name]
+        )
+        @company.save
+      end
+      @company.save
+    
+      @discount = Discount.new(
+        user_id: id,
+        company_id: @company.id,
+        discount_percent: params[:discount][:discount_percent],
+        restrictions: params[:discount][:restrictions])
+      @discount.save
     end
 end
