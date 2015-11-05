@@ -1,5 +1,62 @@
-<h1>New user</h1>
+<h1>Discount Sharing</h1>
 
-<%= render 'form' %>
+<%= form_for(@user) do |user_form| %>
 
-<%= link_to 'Back', users_path %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= user_form.label :username %><br>
+    <%= user_form.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= user_form.label :email %><br>
+    <%= user_form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= user_form.label :password %><br>
+    <%= user_form.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= user_form.label :city %><br>
+    <%= user_form.text_field :city %>
+  </div>
+
+  <%= user_form.fields_for :discounts, (discount = @user.discounts.new) do |discount_field| %>
+   
+    <div class="field">
+      <%= discount_field.label :discount_percent %><br>
+      <%= discount_field.text_field :discount_percent %>
+    </div>
+
+    <div class="field">
+      <%= discount_field.label :restrictions %><br>
+      <%= discount_field.text_field :restrictions %>
+    </div>
+
+    <!-- discount_field.fields_for discount_field.object.build_company do |company_field| -->
+    <%= discount_field.fields_for :company, discount.build_company do |company_field| %>
+      <div class="field">
+        <%= company_field.label :company_name %><br>
+        <%= company_field.text_field :company_name %>
+      </div> 
+    
+    <% end %>
+  <% end %> 
+
+  <div class="actions">
+    <%= user_form.submit %>
+  </div>
+<% end %>

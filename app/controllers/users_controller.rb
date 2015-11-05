@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    # discount = @user.discounts.new
+    # company = discount.build_company
   end
 
   # GET /users/1/edit
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+
 
     respond_to do |format|
       if @user.save
@@ -69,6 +72,12 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password, :city)
+      params.require(:user).permit(
+        :username, :email, :password, :city, discounts_attributes: [
+          :id, :discount_percent, :restrictions, company_attributes: [
+            :id, :company_name
+          ]
+        ]
+      )
     end
 end
