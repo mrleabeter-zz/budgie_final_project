@@ -16,8 +16,8 @@
   <tbody>
     <% @discounts.each do |discount| %>
       <tr>
-        <td><%= discount.company %></td>
-        <td><%= discount.user %></td>
+        <td><%= discount.company.id %></td>
+        <td><%= discount.user.id %></td>
         <td><%= discount.discount_percent %></td>
         <td><%= discount.restrictions %></td>
         <td><%= link_to 'Show', discount %></td>
