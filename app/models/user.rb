@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  has_many :discounts
+  has_many :discounts, dependent: :nullify
 
    validates :username,
                presence: true,

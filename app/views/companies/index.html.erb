@@ -15,7 +15,10 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.company_name %></td>
+<<<<<<< HEAD
 
+=======
+>>>>>>> company_does_not_show_up_without_discounts
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
