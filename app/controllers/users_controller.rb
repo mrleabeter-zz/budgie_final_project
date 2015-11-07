@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_action :set_company_and_discount
 
   # GET /users
   # GET /users.json
@@ -10,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @company = Company.new
+    @discount = Discount.new
   end
 
   # GET /users/new
@@ -26,9 +29,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    @user.save
-    create_helper(@user.id)
+    # @user = User.new(user_params)
+    # @user.save
+    create_helper
 
     respond_to do |format|
       if @user.save
@@ -82,7 +85,10 @@ class UsersController < ApplicationController
       )
     end
 
-    def create_helper(id)
+    def create_helper
+      @user = User.new(user_params)
+      @user.save
+      
       existing_company = Company.find_by(company_name: params[:company][:company_name])
       if existing_company != nil
         @company = existing_company
@@ -95,10 +101,11 @@ class UsersController < ApplicationController
       @company.save
     
       @discount = Discount.new(
-        user_id: id,
+        user_id: @user.id,
         company_id: @company.id,
         discount_percent: params[:discount][:discount_percent],
         restrictions: params[:discount][:restrictions])
       @discount.save
     end
+
 end

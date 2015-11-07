@@ -1,5 +1,6 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /discounts
   # GET /discounts.json
@@ -24,11 +25,24 @@ class DiscountsController < ApplicationController
   # POST /discounts
   # POST /discounts.json
   def create
-    @discount = Discount.new(discount_params)
+    @company = Company.find_by(company_name: params[:company][:company_name])
+      
+    if not @company
+      @company = Company.create(
+        company_name:   params[:company][:company_name]
+      )
+    end
+
+    @discount = Discount.new(
+      user: @user,
+      company: @company,
+      discount_percent: params[:discount][:discount_percent],
+      restrictions: params[:discount][:restrictions]
+      )
 
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to @discount, notice: 'Discount was successfully created.' }
+        format.html { redirect_to user_path(@user), notice: 'Discount was successfully created.' }
         format.json { render action: 'show', status: :created, location: @discount }
       else
         format.html { render action: 'new' }
@@ -67,8 +81,13 @@ class DiscountsController < ApplicationController
       @discount = Discount.find(params[:id])
     end
 
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def discount_params
-      params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions)
+      params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions, company_attributes: [:id, :company_name])
     end
+
 end

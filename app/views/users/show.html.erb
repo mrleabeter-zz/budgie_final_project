@@ -1,5 +1,52 @@
 <p id="notice"><%= notice %></p>
 
+  <table>
+    <thead>
+      <tr>
+        <th data-field="Company">Company</th>
+        <th data-field="Discount">Discount</th>
+        <th data-field="Restrictions">Restrictions</th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @user.discounts.each do |discount| %>
+    <tr>
+      <td><%= discount.company.company_name %></td>
+      <td><%= discount.discount_percent %></td>
+      <td><%= discount.restrictions %></td>
+      <td><button>Add Restriction</button></td>
+      <td><button type="submit" name="action">Update Discount</button></td>
+      <td><button>Delete Discount</button></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for([@user, @discount]) do |discount_form| %>
+
+  <%= fields_for(@company) do |co| %>
+    <div class="field">
+      <%= co.label :company_name %>
+      <%= co.text_field :company_name %>
+    </div>
+  <% end %>
+
+  <div class="input-field">
+    <%= discount_form.label :discount_percent %>
+    <%= discount_form.text_field :discount_percent %>
+  </div>
+
+  <div class="input-field">
+    <%= discount_form.label :restrictions %>
+    <%= discount_form.text_field :restrictions %>
+  </div>
+
+  <div class="actions">
+      <%= discount_form.submit %>
+  </div>
+
+<% end %>
+
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
