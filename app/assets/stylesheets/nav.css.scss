@@ -1,0 +1,17 @@
+#nav-bar {
+  height: 100px;
+  margin: auto;
+  background: lightgrey;
+}
+
+#nav-buttons-container {
+  border: 1px solid black;
+  position: relative;
+  width: 265px;
+  left: 800px;
+  top: 35px;
+}
+
+.nav-button {
+  display: inline-block;
+}

@@ -1,71 +1,78 @@
+<script>
+$(document).ready(function() {
+  $('.show-discount-form').click(function() {
+    $('#discount-form').toggle();
+  });
+})
+</script>
+
+
+
 <p id="notice"><%= notice %></p>
 
-  <table>
-    <thead>
-      <tr>
-        <th data-field="Company">Company</th>
-        <th data-field="Discount">Discount</th>
-        <th data-field="Restrictions">Restrictions</th>
-      </tr>
-    </thead>
-  <tbody>
-    <% @user.discounts.each do |discount| %>
-    <tr>
-      <td><%= discount.company.company_name %></td>
-      <td><%= discount.discount_percent %></td>
-      <td><%= discount.restrictions %></td>
-      <td><button>Add Restriction</button></td>
-      <td><button type="submit" name="action">Update Discount</button></td>
-      <td><button>Delete Discount</button></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= form_for([@user, @discount]) do |discount_form| %>
-
-  <%= fields_for(@company) do |co| %>
-    <div class="field">
-      <%= co.label :company_name %>
-      <%= co.text_field :company_name %>
+<div id="user-discounts">
+  <% @user.discounts.each do |discount| %>
+    <div class="user-discount-card">
+      <h3><%= discount.company.company_name %></h3>
+      <h4><%= discount.discount_percent %>% discount</h4>
+      <ul>
+        <%-# TO DO: find out how to save multiple restrictions to the single table column. (join/split on new line?) -%>
+        <li><%= discount.restrictions %></li>
+        <li><button data-id="<%= discount.id %>">Add Restriction</button></li>
+      </ul>
+      <%= button_to 'Update Discount', [:edit, @user, discount], method: :get %>
+      <%= button_to 'Delete Discount', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>
     </div>
   <% end %>
+  <div class="user-discount-card">
+    <%= form_for([@user, @discount], :html => {:id => 'discount-form'}) do |discount_form| %>
 
-  <div class="input-field">
-    <%= discount_form.label :discount_percent %>
-    <%= discount_form.text_field :discount_percent %>
+      <%= fields_for(@company) do |co| %>
+        <div class="field">
+          <%= co.label :company_name %>
+          <%= co.text_field :company_name %>
+        </div>
+      <% end %>
+
+      <div class="input-field">
+        <%= discount_form.label :discount_percent %>
+        <%= discount_form.text_field :discount_percent %>
+      </div>
+
+      <div class="input-field">
+        <%= discount_form.label :restrictions %>
+        <%= discount_form.text_field :restrictions %>
+      </div>
+
+      <div class="actions">
+          <%= discount_form.submit %>
+      </div>
+
+    <% end %>
   </div>
+</div>
 
-  <div class="input-field">
-    <%= discount_form.label :restrictions %>
-    <%= discount_form.text_field :restrictions %>
-  </div>
+<div id="profile-card">
+  <p>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
 
-  <div class="actions">
-      <%= discount_form.submit %>
-  </div>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<% end %>
+  <p>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <p>
+    <strong>City:</strong>
+    <%= @user.city %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @user.city %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <%= button_to 'Edit', edit_user_path(@user), method: :get %>
+  <%= button_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' },method: :delete %>
+</div>

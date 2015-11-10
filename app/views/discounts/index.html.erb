@@ -16,13 +16,13 @@
   <tbody>
     <% @discounts.each do |discount| %>
       <tr>
-        <td><%= discount.company %></td>
-        <td><%= discount.user %></td>
+        <td><%= discount.company.id %></td>
+        <td><%= discount.user.id %></td>
         <td><%= discount.discount_percent %></td>
         <td><%= discount.restrictions %></td>
-        <td><%= link_to 'Show', [@user, :discount] %></td>
-        <td><%= link_to 'Edit', edit_user_discount_path(discount) %></td>
-        <td><%= link_to 'Destroy', discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [@user, discount] %></td>
+        <td><%= link_to 'Edit', [:edit, @user, discount] %></td>
+        <td><%= link_to 'Destroy', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

@@ -5,12 +5,13 @@ class DiscountsController < ApplicationController
   # GET /discounts
   # GET /discounts.json
   def index
-    @discounts = Discount.all
+    @discounts = @user.discounts
   end
 
   # GET /discounts/1
   # GET /discounts/1.json
   def show
+    @discount = @user.discounts.find(params[:id])
   end
 
   # GET /discounts/new
@@ -20,6 +21,7 @@ class DiscountsController < ApplicationController
 
   # GET /discounts/1/edit
   def edit
+    @discount = @user.discounts.find(params[:id])
   end
 
   # POST /discounts

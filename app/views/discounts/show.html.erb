@@ -2,12 +2,12 @@
 
 <p>
   <strong>Company:</strong>
-  <%= @discount.company %>
+  <%= @discount.company.id %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @discount.user %>
+  <%= @discount.user.id %>
 </p>
 
 <p>
@@ -20,5 +20,5 @@
   <%= @discount.restrictions %>
 </p>
 
-<%= link_to 'Edit', edit_discount_path(@discount) %> |
-<%= link_to 'Back', discounts_path %>
+<td><%= link_to 'Edit', [:edit, @user, @discount] %></td>|
+<%= link_to 'Back', user_discounts_path %>
