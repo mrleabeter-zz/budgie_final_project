@@ -4,12 +4,20 @@
   background: lightgrey;
 }
 
-#nav-buttons-container {
+#logged-in-container {
   border: 1px solid black;
   position: relative;
-  width: 265px;
-  left: 800px;
-  top: 35px;
+  width: 200px;
+  left: 850px;
+  top: -25px;
+}
+
+#nav-buttons-container, #sign-in-container {
+  border: 1px solid black;
+  position: relative;
+  width: 200px;
+  left: 850px;
+  top: 10px;
 }
 
 .nav-button {

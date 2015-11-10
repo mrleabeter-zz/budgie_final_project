@@ -11,5 +11,9 @@ class Discount < ActiveRecord::Base
   validates :restrictions,
               presence: true,
               length: { in: 5..50 }
+              
+  scope :with_user, -> { includes(:user)
+    .where.not( users:{id: nil}) }            
+
 
 end
