@@ -27,20 +27,21 @@ class DiscountsController < ApplicationController
   # POST /discounts
   # POST /discounts.json
   def create
-    @company = Company.find_by(company_name: params[:company][:company_name])
-      
-    if not @company
-      @company = Company.create(
-        company_name:   params[:company][:company_name]
-      )
+    @company = Company.find_or_create_by(company_name: params[:company][:company_name])
+    binding.pry
+    @discount = Discount.find_or_create_by(id: params[:discount][:id]) do |d|
+      d.user = @user.id,
+      d.company = @company,
+      d.discount_percent = params[:discount][:discount_percent],
+      d.restrictions = params[:discount][:restrictions]
     end
 
-    @discount = Discount.new(
-      user: @user,
-      company: @company,
-      discount_percent: params[:discount][:discount_percent],
-      restrictions: params[:discount][:restrictions]
-      )
+    # @discount = Discount.new(
+    #   user: @user,
+    #   company: @company,
+    #   discount_percent: params[:discount][:discount_percent],
+    #   restrictions: params[:discount][:restrictions]
+    #   )
 
     respond_to do |format|
       if @discount.save
@@ -72,7 +73,7 @@ class DiscountsController < ApplicationController
   def destroy
     @discount.destroy
     respond_to do |format|
-      format.html { redirect_to discounts_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
