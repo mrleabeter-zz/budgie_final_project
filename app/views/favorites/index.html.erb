@@ -1,0 +1,73 @@
+<h1>Listing favorites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Company</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= favorite.user_id %></td>
+        <td><%= favorite.company_id %></td>
+        <td><%= favorite.company.company_name %></td>
+        <td><%= link_to 'Show', user_favorites_path(@user) %></td>
+        <td><%= link_to 'Edit', edit_user_favorite_path(@user, favorite) %></td>
+        <td><%= link_to 'Destroy', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Favorite', new_user_favorite_path(@user) %>
+
+
+<h1>Listing companies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.company_name %></td>
+
+        <td><%= link_to 'Show', company %></td>
+        <td><%= link_to 'Favorite', user_favorites_path(@user, company_id: company.id), method: :post %></td>
+        <td><%= link_to 'Edit', edit_company_path(company) %></td>
+        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
