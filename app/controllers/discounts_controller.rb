@@ -28,20 +28,12 @@ class DiscountsController < ApplicationController
   # POST /discounts.json
   def create
     @company = Company.find_or_create_by(company_name: params[:company][:company_name])
-    binding.pry
-    @discount = Discount.find_or_create_by(id: params[:discount][:id]) do |d|
-      d.user = @user.id,
-      d.company = @company,
-      d.discount_percent = params[:discount][:discount_percent],
-      d.restrictions = params[:discount][:restrictions]
-    end
+    @discount = Discount.find_or_create_by(id: params[:discount][:id])
 
-    # @discount = Discount.new(
-    #   user: @user,
-    #   company: @company,
-    #   discount_percent: params[:discount][:discount_percent],
-    #   restrictions: params[:discount][:restrictions]
-    #   )
+    @discount.user_id = @user.id
+    @discount.company_id = @company.id
+    @discount.discount_percent = params[:discount][:discount_percent]
+    @discount.restrictions = params[:discount][:restrictions]
 
     respond_to do |format|
       if @discount.save

@@ -21,7 +21,7 @@ $(document).ready(function() {
       <ul>
         <%-# TO DO: find out how to save multiple restrictions to the single table column. (join/split on new line?) -%>
         <li><%= discount.restrictions %></li>
-        <li><button data-id="<%= discount.id %>">Add Restriction</button></li>
+        <button data-id="<%= discount.id %>">Add Restriction</button>
       </ul>
       <button class="update-discount-button" data-id="<%= discount.id %>">Update</button>
       <%= button_to 'Delete', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>

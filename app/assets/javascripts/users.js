@@ -11,11 +11,10 @@ $(document).on('click', '.update-discount-button', function(){
   var discountPercent = parseInt(discountDiv.children('h4').text());
   var discountRestrictions = discountDiv.find('li').text();
 
-  $('.user-discount-form').find('#company_company_name').val(discountCompany);
-  $('.user-discount-form').find('#discount_discount_percent').val(discountPercent);
-  $('.user-discount-form').find('#discount_restrictions').val(discountRestrictions);
+  $('.user-discount-form #discount_id').val(id);
+  $('.user-discount-form #company_company_name').val(discountCompany);
+  $('.user-discount-form #discount_discount_percent').val(discountPercent);
+  $('.user-discount-form #discount_restrictions').val(discountRestrictions);
 
-  debugger
-  
   console.log('hello')
 })
