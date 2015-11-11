@@ -19,9 +19,10 @@ $(document).ready(function() {
       <h3><%= discount.company.company_name %></h3>
       <h4><%= discount.discount_percent %>% discount</h4>
       <ul>
-        <%-# TO DO: find out how to save multiple restrictions to the single table column. (join/split on new line?) -%>
-        <li><%= discount.restrictions %></li>
-        <button data-id="<%= discount.id %>">Add Restriction</button>
+        <% discount.restrictions.split("\n").each do |restriction|%> 
+            <li><%= restriction %></li>
+          <% end %>
+        <button class="add-restriction" data-id="<%= discount.id %>">Add Restriction</button>
       </ul>
       <button class="update-discount-button" data-id="<%= discount.id %>">Update</button>
       <%= button_to 'Delete', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>
@@ -32,7 +33,6 @@ $(document).ready(function() {
   <div class="user-discount-card user-discount-form">
     <%= form_for([@user, @discount], :html => {:id => 'discount-form'}) do |discount_form| %>
 
-    <!-- As soon as I enter @discount.id after :id, it fails to load page because when the form is empty (ie, create discount) then @discount.id would be nil -->
       <%= discount_form.hidden_field(:id) %>
 
       <%= fields_for(@company) do |co| %>
@@ -47,11 +47,18 @@ $(document).ready(function() {
         <%= discount_form.text_field :discount_percent %>
       </div>
 
-      <div class="input-field">
+      <div class="input-field" id="restrictions">
         <%= discount_form.label :restrictions %>
-        <%= discount_form.text_field :restrictions %>
+        <div class="restriction-wrapper">
+          <div>
+            <input type="text" name="restriction[]" value=""/>
+
+            <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
+          </div>
+        </div>
       </div>
 
+      
       <div class="actions">
           <%= discount_form.submit "Save" %>
       </div>

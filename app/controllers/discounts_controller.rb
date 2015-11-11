@@ -30,10 +30,10 @@ class DiscountsController < ApplicationController
     @company = Company.find_or_create_by(company_name: params[:company][:company_name])
     @discount = Discount.find_or_create_by(id: params[:discount][:id])
 
-    @discount.user_id = @user.id
+    @discount.user_id = session[:user_id]
     @discount.company_id = @company.id
     @discount.discount_percent = params[:discount][:discount_percent]
-    @discount.restrictions = params[:discount][:restrictions]
+    @discount.restrictions = params[:restriction].join("\n")
 
     respond_to do |format|
       if @discount.save
