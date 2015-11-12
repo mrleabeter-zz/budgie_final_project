@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104223210) do
+ActiveRecord::Schema.define(version: 20151110003458) do
 
   create_table "categories", force: true do |t|
     t.string   "department"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20151104223210) do
 
   add_index "companies", ["category_id"], name: "index_companies_on_category_id"
 
+  create_table "conversations", force: true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "discounts", force: true do |t|
     t.integer  "company_id"
     t.integer  "user_id"
@@ -41,6 +48,18 @@ ActiveRecord::Schema.define(version: 20151104223210) do
   add_index "discounts", ["category_id"], name: "index_discounts_on_category_id"
   add_index "discounts", ["company_id"], name: "index_discounts_on_company_id"
   add_index "discounts", ["user_id"], name: "index_discounts_on_user_id"
+
+  create_table "messages", force: true do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    # t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

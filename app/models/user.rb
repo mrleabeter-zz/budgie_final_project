@@ -17,9 +17,6 @@ class User < ActiveRecord::Base
                uniqueness: true
    validate :valid_email?
 
-   
-
-
   private
 
   def valid_email?
