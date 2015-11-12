@@ -1,11 +1,9 @@
 Budgie::Application.routes.draw do
-  
-  
-
   # get "sessions/new"
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+  get 'messages', to: 'conversations#index', as: 'messages'
   resources :categories
 
   resources :discounts
@@ -18,6 +16,10 @@ Budgie::Application.routes.draw do
   resources :users do
     resources :companies, :discounts, :favorites
   end  
+
+  resources :conversations do
+    resources :messages
+  end 
 
   # resources :sessions
 

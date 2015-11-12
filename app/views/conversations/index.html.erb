@@ -1,0 +1,26 @@
+<div class="mailbox">
+ <h3>Mailbox</h3>
+ <div class="mailbox list">
+  <div class="messages">
+  <% @conversations.each do |conversation| %>
+      <ul><% conversation.to_me?(current_user) ? other_person = conversation.sender :   other_person = conversation.recipient %>
+    <li><%= link_to other_person.username, conversation_messages_path(conversation) %> Last message sent at: <%= conversation.last_message.message_time %></li>
+    </ul>
+<!--     <%= conversation.last_message.body %> -->
+   <% end %>
+  </div>
+ </div>
+</div>
+<div class="all users">
+ <h3>All Users</h3>
+  <div class="user list">
+   <% @users.each do |user| %>
+    <% if user.id != current_user.id %>
+     <div class="users">
+   <%= user.username %> <%= link_to 'Message me!', conversations_path(sender_id: 
+       current_user.id, recipient_id: user.id), method: 'post'%>
+     </div>
+  <% end %>
+ <% end %>
+ </div>
+</div>
