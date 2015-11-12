@@ -22,7 +22,6 @@ $(document).ready(function() {
         <% discount.restrictions.split("\n").each do |restriction|%> 
             <li><%= restriction %></li>
           <% end %>
-        <button class="add-restriction" data-id="<%= discount.id %>">Add Restriction</button>
       </ul>
       <button class="update-discount-button" data-id="<%= discount.id %>">Update</button>
       <%= button_to 'Delete', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>
@@ -50,7 +49,7 @@ $(document).ready(function() {
       <div class="input-field" id="restrictions">
         <%= discount_form.label :restrictions %>
         <div class="restriction-wrapper">
-          <div>
+          <div class="restriction-fields">
             <input type="text" name="restriction[]" value=""/>
 
             <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
@@ -64,8 +63,6 @@ $(document).ready(function() {
       </div>
 
     <% end %>
-
-    <!-- <button class="show-discount-form">Add Discount</button> -->
   
   </div>
 </div>

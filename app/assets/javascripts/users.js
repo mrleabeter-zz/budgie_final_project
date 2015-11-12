@@ -1,5 +1,3 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
 $(document).ready(function() {
 
   $(document).on('click', '.update-discount-button', function(){
@@ -7,21 +5,32 @@ $(document).ready(function() {
     var discountDiv = $('div #discount-' + id)
     var discountCompany = discountDiv.children('h3').text();
     var discountPercent = parseInt(discountDiv.children('h4').text());
-    var discountRestrictions = discountDiv.find('li').text();
+
+    var restrictionsArray = discountDiv.find('li').map(function() {
+      return $(this).text();
+    }).toArray();
 
     $('.user-discount-form #discount_id').val(id);
     $('.user-discount-form #company_company_name').val(discountCompany);
     $('.user-discount-form #discount_discount_percent').val(discountPercent);
-    $('.user-discount-form #discount_restrictions').val(discountRestrictions);
+    
+    $(restrictionsArray).each(function(index, string) {
+      if (index === 0) {
+        $('.restriction-fields input').val(string);
+      } else {
+        $('.restriction-fields').append("<div><input type='text' name='restriction[]' value='"+string+"'/><a href='javascript:void(0);'' class='remove-button' title='Remove Restriction'>-</a></div>");
+        restrictionCount++;
+      }
+    });    
   });
 
   var maxField = 3;
   var fieldHTML = '<div><input type="text" name="restriction[]" value=""/><a href="javascript:void(0);" class="remove-button" title="Remove Restriction">-</a></div>';
-  var x = 1;
+  var restrictionCount = 1;
   $('.add-restriction').click(function() {
     console.log("hello");
-    if (x < maxField) {
-      x++;
+    if (restrictionCount < maxField) {
+      restrictionCount++;
       $('.restriction-wrapper').append(fieldHTML);
     }
   });
@@ -29,7 +38,12 @@ $(document).ready(function() {
   $('.restriction-wrapper').on('click', '.remove-button', function(event) {
     event.preventDefault();
     $(this).parent('div').remove();
-    x--
+    restrictionCount--;
   });
 
+  $('#restrictions').on('click', 'remove-button', function(event) {
+    event.preventDefault();
+    $(this).parent('div').remove();
+    restrictionCount--;
+  });
 });
