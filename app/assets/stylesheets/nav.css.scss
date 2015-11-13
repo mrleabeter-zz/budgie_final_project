@@ -1,0 +1,26 @@
+#nav-bar {
+  height: 100px;
+  margin: auto;
+  background: lightgrey;
+}
+
+#logged-in-container {
+  border: 1px solid black;
+  position: relative;
+  text-align: right;
+  width: 200px;
+  left: 850px;
+  top: -25px;
+}
+
+#nav-buttons-container, #sign-in-container {
+  border: 1px solid black;
+  position: relative;
+  width: 200px;
+  left: 850px;
+  top: 10px;
+}
+
+.nav-button {
+  display: inline-block;
+}

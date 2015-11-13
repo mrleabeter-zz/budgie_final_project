@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151111182132) do
 
-
   create_table "categories", force: true do |t|
     t.string   "department"
     t.datetime "created_at"
@@ -53,20 +52,21 @@ ActiveRecord::Schema.define(version: 20151111182132) do
   create_table "favorites", force: true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
-  end  
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "messages", force: true do |t|
     t.text     "body"
     t.integer  "conversation_id"
-    # t.integer  "user_id"
+    t.integer  "user_id"
     t.boolean  "read",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end  
+  end
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
-
 
   create_table "users", force: true do |t|
     t.string   "username"

@@ -1,15 +1,17 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /discounts
   # GET /discounts.json
   def index
-    @discounts = Discount.all
+    @discounts = @user.discounts
   end
 
   # GET /discounts/1
   # GET /discounts/1.json
   def show
+    @discount = @user.discounts.find(params[:id])
   end
 
   # GET /discounts/new
@@ -19,16 +21,23 @@ class DiscountsController < ApplicationController
 
   # GET /discounts/1/edit
   def edit
+    @discount = @user.discounts.find(params[:id])
   end
 
   # POST /discounts
   # POST /discounts.json
   def create
-    @discount = Discount.new(discount_params)
+    @company = Company.find_or_create_by(company_name: params[:company][:company_name])
+    @discount = Discount.find_or_create_by(id: params[:discount][:id])
+
+    @discount.user_id = session[:user_id]
+    @discount.company_id = @company.id
+    @discount.discount_percent = params[:discount][:discount_percent]
+    @discount.restrictions = params[:restriction].join("\n")
 
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to @discount, notice: 'Discount was successfully created.' }
+        format.html { redirect_to user_path(@user), notice: 'Discount was successfully created.' }
         format.json { render action: 'show', status: :created, location: @discount }
       else
         format.html { render action: 'new' }
@@ -56,7 +65,7 @@ class DiscountsController < ApplicationController
   def destroy
     @discount.destroy
     respond_to do |format|
-      format.html { redirect_to discounts_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -67,8 +76,13 @@ class DiscountsController < ApplicationController
       @discount = Discount.find(params[:id])
     end
 
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def discount_params
-      params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions)
+      params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions, company_attributes: [:id, :company_name])
     end
+
 end

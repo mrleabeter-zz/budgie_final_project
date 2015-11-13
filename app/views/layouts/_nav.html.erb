@@ -1,0 +1,29 @@
+<div id="nav-bar">
+
+  <h1>Oh SNAP! It's the nav bar!</h1>
+
+  <% if current_user %>
+    
+    <div id="logged-in-container">
+      <%= current_user.username %>: <%= link_to "Log out", logout_path %>
+    </div>
+
+    <div id="nav-buttons-container">
+      <a href="/companies"><button class="nav-button">Companies</button></a>
+
+      <button class="nav-button">Inbox</button>
+      <%= link_to "Messages", messages_path %>
+
+      <a href="/users/<%= current_user.id %>"><button>Profile</button></a>
+    </div>
+    
+  <% else %>
+
+    <div id="sign-in-container">
+      <%= link_to "Sign Up", signup_path %>
+      <%= link_to "Log In", login_path %>
+    </div>
+
+  <% end %>
+
+</div>

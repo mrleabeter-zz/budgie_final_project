@@ -1,3 +1,25 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/*#discount-form {
+  display: none;
+}*/
+
+.user-discount-card {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid black;
+  height: 220px;
+  width: 220px;
+}
+
+#profile-card {
+  border: 1px solid black;
+}
+
+.user-update-form {
+  display: none;
+  border: 1px solid black;
+}

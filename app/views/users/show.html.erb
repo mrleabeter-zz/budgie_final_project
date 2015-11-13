@@ -1,24 +1,99 @@
+<script>
+$(document).ready(function() {
+  $('.show-discount-form').click(function() {
+    $('#discount-form').toggle();
+    $('.show-discount-form').hide();
+  });
+})
+</script>
+
+
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<div id="user-discounts">
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <% @user.discounts.each do |discount| %>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+    <div class="user-discount-card" id="discount-<%=discount.id%>">
+      <h3><%= discount.company.company_name %></h3>
+      <h4><%= discount.discount_percent %>% discount</h4>
+      <ul>
+        <% discount.restrictions.split("\n").each do |restriction|%> 
+            <li><%= restriction %></li>
+          <% end %>
+      </ul>
+      <button class="update-discount-button" data-id="<%= discount.id %>">Update</button>
+      <%= button_to 'Delete', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>
+    </div>
 
-<p>
-  <strong>City:</strong>
-  <%= @user.city %>
-</p>
+  <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <div class="user-discount-card user-discount-form">
+    <%= form_for([@user, @discount], :html => {:id => 'discount-form'}) do |discount_form| %>
+
+      <%= discount_form.hidden_field(:id) %>
+
+      <%= fields_for(@company) do |co| %>
+        <div class="field">
+          <%= co.label :company_name %>
+          <%= co.text_field :company_name %>
+        </div>
+      <% end %>
+
+      <div class="input-field">
+        <%= discount_form.label :discount_percent %>
+        <%= discount_form.text_field :discount_percent %>
+      </div>
+
+      <div class="input-field" id="restrictions">
+        <%= discount_form.label :restrictions %>
+        <div class="restriction-wrapper">
+          <div class="restriction-fields">
+            <input type="text" name="restriction[]" value=""/>
+
+            <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="actions">
+          <%= discount_form.submit "Save" %>
+      </div>
+
+    <% end %>
+  
+  </div>
+</div>
+
+<div id="user-details-window">
+  <div id="user-details">
+    <p>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Password:</strong>
+      <%= @user.password %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @user.city %>
+    </p>
+
+    <button id="user-update-button">Update</button>
+  </div>
+
+  <div class="user-update-form">
+    <%= render 'form' %>
+  </div>
+  
+</div>

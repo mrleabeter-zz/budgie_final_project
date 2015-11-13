@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # before_action :set_company_and_discount
 
   # GET /users
   # GET /users.json
@@ -10,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @company = Company.new
+    @discount = Discount.new
   end
 
   # GET /users/new
@@ -26,15 +29,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    @user.save
-    create_helper(@user.id)
-
+    create_helper
+binding.pry
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
         format.html { redirect_to companies_path, notice: 'User was successfully created.' }
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -61,6 +61,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
+    session.clear
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
@@ -84,23 +85,17 @@ class UsersController < ApplicationController
       )
     end
 
-    def create_helper(id)
-      existing_company = Company.find_by(company_name: params[:company][:company_name])
-      if existing_company != nil
-        @company = existing_company
-      else
-        @company = Company.new(
-          company_name: params[:company][:company_name]
-        )
-        @company.save
-      end
-      @company.save
+    def create_helper
+      @user = User.new(user_params)
+      @user.save
+      @company = Company.find_or_create_by(company_name: params[:company][:company_name])
     
       @discount = Discount.new(
-        user_id: id,
+        user_id: @user.id,
         company_id: @company.id,
         discount_percent: params[:discount][:discount_percent],
-        restrictions: params[:discount][:restrictions])
+        restrictions: params[:restriction].join("\n"))
       @discount.save
     end
+
 end
