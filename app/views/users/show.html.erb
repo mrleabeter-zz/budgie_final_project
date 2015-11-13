@@ -67,27 +67,33 @@ $(document).ready(function() {
   </div>
 </div>
 
-<div id="profile-card">
-  <p>
-    <strong>Username:</strong>
-    <%= @user.username %>
-  </p>
+<div id="user-details-window">
+  <div id="user-details">
+    <p>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-  <p>
-    <strong>Password:</strong>
-    <%= @user.password %>
-  </p>
+    <p>
+      <strong>Password:</strong>
+      <%= @user.password %>
+    </p>
 
-  <p>
-    <strong>City:</strong>
-    <%= @user.city %>
-  </p>
+    <p>
+      <strong>City:</strong>
+      <%= @user.city %>
+    </p>
 
-  <%= button_to 'Edit', edit_user_path(@user), method: :get %>
-  <%= button_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' },method: :delete %>
+    <button id="user-update-button">Update</button>
+  </div>
+
+  <div class="user-update-form">
+    <%= render 'form' %>
+  </div>
+  
 </div>

@@ -27,22 +27,28 @@ $(document).ready(function() {
   var maxField = 3;
   var fieldHTML = '<div><input type="text" name="restriction[]" value=""/><a href="javascript:void(0);" class="remove-button" title="Remove Restriction">-</a></div>';
   var restrictionCount = 1;
-  $('.add-restriction').click(function() {
+  $(document).on('click', '.add-restriction', function() {
     if (restrictionCount < maxField) {
       restrictionCount++;
       $('.restriction-wrapper').append(fieldHTML);
     }
   });
 
-  $('.restriction-wrapper').on('click', '.remove-button', function(event) {
+  $(document).on('click', '.restriction-wrapper .remove-button', function(event) {
     event.preventDefault();
     $(this).parent('div').remove();
     restrictionCount--;
   });
 
-  $('#restrictions').on('click', 'remove-button', function(event) {
+  $(document).on('click', '#restrictions remove-button', function(event) {
     event.preventDefault();
     $(this).parent('div').remove();
     restrictionCount--;
   });
+
+  $(document).on('click', '#user-update-button', function() {
+    $('#user-details').hide();
+    $('.user-update-form').show();
+  });
+
 });

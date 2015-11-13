@@ -26,12 +26,12 @@
 
   <div class="field">
     <%= user_form.label :password %><br>
-    <%= user_form.text_field :password %>
+    <%= user_form.password_field :password %>
   </div>
 
   <div class="field">
     <%= user_form.label :password_confirmation %><br>
-    <%= user_form.text_field :password_confirmation %>
+    <%= user_form.password_field :password_confirmation %>
   </div>
 
   <div class="field">
@@ -51,7 +51,7 @@
       <%= di.label :discount_percent %><br>
       <%= di.text_field :discount_percent %>
     </div>
-XXXXXXXXXX
+
     <div class="input-field" id="restrictions">
       <%= di.label :restrictions %>
       <div class="restriction-wrapper">
@@ -62,7 +62,7 @@ XXXXXXXXXX
         </div>
       </div>
     </div>
-XXXXXXXXXX
+
     
   <% end %>
   <div class="actions">
