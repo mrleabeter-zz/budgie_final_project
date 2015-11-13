@@ -51,12 +51,20 @@
       <%= di.label :discount_percent %><br>
       <%= di.text_field :discount_percent %>
     </div>
-    <div class="field">
-      <%= di.label :restrictions %><br>
-      <%= di.text_field :restrictions %>
-    </div>
-  <% end %>
+XXXXXXXXXX
+    <div class="input-field" id="restrictions">
+      <%= di.label :restrictions %>
+      <div class="restriction-wrapper">
+        <div class="restriction-fields">
+          <input type="text" name="restriction[]" value=""/>
 
+          <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
+        </div>
+      </div>
+    </div>
+XXXXXXXXXX
+    
+  <% end %>
   <div class="actions">
     <%= user_form.submit %>
   </div>

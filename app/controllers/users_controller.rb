@@ -88,23 +88,13 @@ class UsersController < ApplicationController
     def create_helper
       @user = User.new(user_params)
       @user.save
-      
-      existing_company = Company.find_by(company_name: params[:company][:company_name])
-      if existing_company != nil
-        @company = existing_company
-      else
-        @company = Company.new(
-          company_name: params[:company][:company_name]
-        )
-        @company.save
-      end
-      @company.save
+      @company = Company.find_or_create_by(company_name: params[:company][:company_name])
     
       @discount = Discount.new(
         user_id: @user.id,
         company_id: @company.id,
         discount_percent: params[:discount][:discount_percent],
-        restrictions: params[:discount][:restrictions])
+        restrictions: params[:restriction].join("\n"))
       @discount.save
     end
 

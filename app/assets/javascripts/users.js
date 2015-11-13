@@ -28,7 +28,6 @@ $(document).ready(function() {
   var fieldHTML = '<div><input type="text" name="restriction[]" value=""/><a href="javascript:void(0);" class="remove-button" title="Remove Restriction">-</a></div>';
   var restrictionCount = 1;
   $('.add-restriction').click(function() {
-    console.log("hello");
     if (restrictionCount < maxField) {
       restrictionCount++;
       $('.restriction-wrapper').append(fieldHTML);
