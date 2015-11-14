@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
                uniqueness: true
    validate :valid_email?
 
-   validates :invitation_id,
-                presence: true
+   # validates :invitation_id,
+   #              presence: true
 
   def invitation_token
     invitation.token if invitation
