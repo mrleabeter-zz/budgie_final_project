@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_conversation_user, only: [:index]
   before_action do
    @conversation = Conversation.find(params[:conversation_id])
   end 
@@ -36,5 +37,12 @@ class MessagesController < ApplicationController
     def message_params
     params.require(:message).permit(:body, :user_id)
     end
+
+    def authenticate_conversation_user
+      @conversation = Conversation.find(params[:conversation_id])
+      unless (@conversation.sender == current_user || @conversation.recipient == current_user)
+        redirect_to(:root, alert: "Not allowed")
+      end  
+    end 
 
 end
