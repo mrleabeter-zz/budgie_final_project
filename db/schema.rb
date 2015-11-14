@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111182132) do
-
+ActiveRecord::Schema.define(version: 20151112013027) do
 
   create_table "categories", force: true do |t|
     t.string   "department"
@@ -53,20 +52,30 @@ ActiveRecord::Schema.define(version: 20151111182132) do
   create_table "favorites", force: true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
-  end  
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "invitations", force: true do |t|
+    t.integer  "sender_id"
+    t.string   "recipient_email"
+    t.string   "token"
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "messages", force: true do |t|
     t.text     "body"
     t.integer  "conversation_id"
-    # t.integer  "user_id"
+    t.integer  "user_id"
     t.boolean  "read",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end  
+  end
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
-
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -75,6 +84,8 @@ ActiveRecord::Schema.define(version: 20151111182132) do
     t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "invitation_id"
+    t.integer  "invitation_limit"
   end
 
 end

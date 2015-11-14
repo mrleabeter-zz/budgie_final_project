@@ -4,6 +4,7 @@ Budgie::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'messages', to: 'conversations#index', as: 'messages'
+  get 'favorites', to: 'favorites#index', as: 'favorites'
   resources :categories
 
   resources :discounts
@@ -23,6 +24,8 @@ Budgie::Application.routes.draw do
 
   # resources :sessions
 
+  resources :invitations
+  
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'users#index'
