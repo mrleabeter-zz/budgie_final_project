@@ -1,86 +1,101 @@
 <h1>Discount Sharing</h1>
 
-  <div id="private_beta">
-    <div>
-    <p>We are currently in private beta. Please submit your email address below, and we will notify you when we are ready to accept more users.</p> 
+<div class="about-signup-container">
+  <div id="about-budgie">
+    <h1>Cheep is Cheap!</h1>
+    <p>Budgie is a place where you can access a long list of employee discounts in your area.<br/>All you've got to do in exchance, is share your employee discount with the community!</p>
+    <button id="signup-button">Sign Up Free!</button>
+  </div>
+
+  <div id="signup-form">
+    <button id="about-button">About Us</button>
+    <%= form_for(@user) do |user_form| %>
+      <%= user_form.hidden_field :invitation_token %>
+
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= user_form.label :username %><br>
+        <%= user_form.text_field :username %>
+      </div>
+
+      <div class="field">
+        <%= user_form.label :email %><br>
+        <%= user_form.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= user_form.label :password %><br>
+        <%= user_form.password_field :password %>
+      </div>
+
+      <div class="field">
+        <%= user_form.label :password_confirmation %><br>
+        <%= user_form.password_field :password_confirmation %>
+      </div>
+
+      <div class="field">
+        <%= user_form.label :city %><br>
+        <%= user_form.text_field :city %>
+      </div>
+      
+      <%= fields_for(@company) do |co| %>
+        <div class="field">
+          <%= co.label :company_name %><br>
+          <%= co.text_field :company_name %>
+        </div>
+      <% end %>
+
+      <%= fields_for(@discount) do |di| %>
+        <div class="field">
+          <%= di.label :discount_percent %><br>
+          <%= di.text_field :discount_percent %>
+        </div>
+
+        <div class="input-field" id="restrictions">
+          <%= di.label :restrictions %>
+          <div class="restriction-wrapper">
+            <div class="restriction-fields">
+              <input type="text" name="restriction[]" value=""/>
+
+              <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
+            </div>
+          </div>
+        </div>
+
+        
+      <% end %>
+      <div class="actions">
+        <%= user_form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="beta-mode-container">
+  <div id="beta-mode-card">
+    <h1>Sign up for our beta version...</h1>
+    <img id="beta-lock" src="" alt="Lock Image">
+    <h1>And start saving!</h1>
+  </div>
+
+  <div id="beta-mode-form">
+    <p>We are currently in beta mode. Please submit your email address, and we will notify you when we're ready to accept more users.</p> 
 
     <%= form_for Invitation.new do |f| %>
-      <p>
         <%= f.label :recipient_email, "Your Email:" %>
         <%= f.text_field :recipient_email %>
         <%= f.submit 'Submit' %>
-      </p>
-    </div>
-  </div>    
     <% end %> 
-
-<%= form_for(@user) do |user_form| %>
-<%= user_form.hidden_field :invitation_token %>
-
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= user_form.label :username %><br>
-    <%= user_form.text_field :username %>
   </div>
-
-  <div class="field">
-    <%= user_form.label :email %><br>
-    <%= user_form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= user_form.label :password %><br>
-    <%= user_form.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= user_form.label :password_confirmation %><br>
-    <%= user_form.password_field :password_confirmation %>
-  </div>
-
-  <div class="field">
-    <%= user_form.label :city %><br>
-    <%= user_form.text_field :city %>
-  </div>
-  
-  <%= fields_for(@company) do |co| %>
-    <div class="field">
-      <%= co.label :company_name %><br>
-      <%= co.text_field :company_name %>
-    </div>
-  <% end %>
-
-  <%= fields_for(@discount) do |di| %>
-    <div class="field">
-      <%= di.label :discount_percent %><br>
-      <%= di.text_field :discount_percent %>
-    </div>
-
-    <div class="input-field" id="restrictions">
-      <%= di.label :restrictions %>
-      <div class="restriction-wrapper">
-        <div class="restriction-fields">
-          <input type="text" name="restriction[]" value=""/>
-
-          <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
-        </div>
-      </div>
-    </div>
-
-    
-  <% end %>
-  <div class="actions">
-    <%= user_form.submit %>
-  </div>
-<% end %>
+</div>
