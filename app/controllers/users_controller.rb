@@ -17,9 +17,9 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new(:invitation_token => params[:invitation_token])
-    @user.email = @user.invitation.receipient_email if @user.invitation
-    # @user = User.new
+    # @user = User.new(:invitation_token => params[:invitation_token])
+    # @user.email = @user.invitation.receipient_email if @user.invitation
+    @user = User.new
     @company = Company.new
     @discount = Discount.new
   end

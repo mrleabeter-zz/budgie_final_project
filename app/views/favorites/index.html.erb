@@ -30,6 +30,174 @@
 <%= link_to 'New Favorite', new_user_favorite_path(@user) %>
 
 
+<div class="container">
+<div class="row">
+<% @favorites.each do |favorite| %>
+ 
+          <div class="col-md-4 col-sm-6">
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <img src="images/rotating_card_thumb.png"/>
+                        </div>
+                        <div class="user">
+                            <img class="img-circle" src="images/rotating_card_profile2.png"/>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <h3 class="name"><%= favorite.company.company_name.truncate(16) %></h3>
+                                <p class="profession">Web Developer</p>
+                                <h5><i class="fa fa-map-marker fa-fw text-muted"></i> Bucharest, Romania</h5>
+                                <h5><i class="fa fa-building-o fa-fw text-muted"></i> Creative Tim Inc. </h5>
+                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> mike@creative-tim.com</h5>
+                                
+                            </div>
+                            <div class="footer">
+                                <button class="btn btn-simple">
+          <%= link_to ' Delete ', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-trash-o"%>
+        </button>
+
+        <button class="btn btn-simple" onclick="rotateCard(this)">
+                                    <i class="fa fa-mail-forward"></i> Manual Flip
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div class="header">
+                            <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                        </div> 
+                        <div class="content">
+                            <div class="main">
+                                <h4 class="text-center">Experince</h4>
+                                <p>Mike was working with our team since 2012.</p>
+                                <h4 class="text-center">Areas of Expertise</h4>
+                                <p>Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                                <i class="fa fa-reply"></i> Back
+                            </button>
+                            <div class="social-links text-center">
+                                <a href="http://cretive-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                                <a href="http://cretive-tim.com" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
+                                <a href="http://cretive-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
+                            </div>
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+        </div> <!-- end col sm 3 -->
+<!--         <div class="col-sm-1"></div> -->
+
+
+<% end %>
+</div>
+</div>
+
+<script type="text/javascript">
+    $().ready(function(){
+        $('[rel="tooltip"]').tooltip();
+        
+    });
+    
+    function rotateCard(btn){
+        var $card = $(btn).closest('.card-container');
+        console.log($card);
+        if($card.hasClass('hover')){
+            $card.removeClass('hover');
+        } else {
+            $card.addClass('hover');
+        }
+    }
+</script>
+
+
+<h1>Listing companies</h1>
+
+<div class="container">
+<div class="row">
+<% @companies.each do |company| %>
+ 
+          <div class="col-md-4 col-sm-6">
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <img src="images/rotating_card_thumb.png"/>
+                        </div>
+                        <div class="user">
+                            <img class="img-circle" src="images/rotating_card_profile2.png"/>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+                                <h3 class="name"><%= company.company_name.truncate(16) %></h3>
+                               
+
+                              <!--   <p class="profession">Web Developer</p> -->
+              <!--                   <h5><i class="fa fa-map-marker fa-fw text-muted"></i> Bucharest, Romania</h5>
+                                <h5><i class="fa fa-building-o fa-fw text-muted"></i> Creative Tim Inc. </h5>
+                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> mike@creative-tim.com</h5> -->
+                                
+                            </div>
+                            <div class="footer"> 
+                            <h5 class="name"><%= link_to 'Favorite', user_favorites_path(@user, company_id: company.id), method: :post %></h5>
+                                
+        <i class="fa fa-thumbs-up"></i>
+                                <button class="btn btn-simple" onclick="rotateCard(this)">
+                                    <i class="fa fa-mail-forward"></i> Manual Flip
+                                </button>
+                            </div>
+                        </div>
+                    </div> end front panel
+
+
+                    <div class="back">
+                        <div class="header">
+                            <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                        </div> 
+                        <div class="content">
+                            <div class="main">
+                                <h4 class="text-center">Experince</h4>
+                                <p>Mike was working with our team since 2012.</p>
+                                <h4 class="text-center">Areas of Expertise</h4>
+                                <p>Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                                <i class="fa fa-reply"></i> Back
+                            </button>
+                            <div class="social-links text-center">
+                                <a href="http://cretive-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                                <a href="http://cretive-tim.com" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
+                                <a href="http://cretive-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
+                            </div>
+                        </div>
+                    </div> <!-- end back panel
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+        </div> <!-- end col sm 3 -->
+<!--         <div class="col-sm-1"></div> -->
+
+   
+</div>
+<% end %>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <h1>Listing companies</h1>
 
 <table>
