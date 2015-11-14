@@ -32,7 +32,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     create_helper
-binding.pry
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
