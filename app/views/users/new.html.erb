@@ -1,6 +1,21 @@
 <h1>Discount Sharing</h1>
 
+  <div id="private_beta">
+    <div>
+    <p>We are currently in private beta. Please submit your email address below, and we will notify you when we are ready to accept more users.</p> 
+
+    <%= form_for Invitation.new do |f| %>
+      <p>
+        <%= f.label :recipient_email, "Your Email:" %>
+        <%= f.text_field :recipient_email %>
+        <%= f.submit 'Submit' %>
+      </p>
+    </div>
+  </div>    
+    <% end %> 
+
 <%= form_for(@user) do |user_form| %>
+<%= user_form.hidden_field :invitation_token %>
 
   <% if @user.errors.any? %>
     <div id="error_explanation">

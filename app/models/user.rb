@@ -3,7 +3,11 @@ class User < ActiveRecord::Base
   has_many :discounts, dependent: :nullify
   has_many :companies
   has_many :favorites
+  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  belongs_to :invitation
   has_secure_password
+  
+  before_create :set_invitation_limit
 
   # attr_accessor :username, :email, :password, :password_confirmation
 
@@ -19,6 +23,17 @@ class User < ActiveRecord::Base
                uniqueness: true
    validate :valid_email?
 
+   validates :invitation_id,
+                presence: true
+
+  def invitation_token
+    invitation.token if invitation
+  end
+  
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
+  
   private
 
   def valid_email?
@@ -29,6 +44,10 @@ class User < ActiveRecord::Base
     if self.favorites.where(company: company_id).empty?
       Favorite.create(user: self, company: company_id)
     end
+  end
+  
+  def set_invitation_limit
+    self.invitation_limit = 3
   end
 
 end
