@@ -1,8 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate_conversation_user, only: [:index]
-  before_action do
-   @conversation = Conversation.find(params[:conversation_id])
-  end 
+  before_action :load_conversation, except: [:update]  
 
   def index
    @messages = @conversation.messages.all
@@ -33,6 +31,13 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update
+    @message = Message.find(params[:id])
+    @message.read = true
+    @message.save
+    render nothing: true
+  end
+
   private
     def message_params
     params.require(:message).permit(:body, :user_id)
@@ -44,5 +49,9 @@ class MessagesController < ApplicationController
         redirect_to(:root, alert: "Not allowed")
       end  
     end 
+
+    def load_conversation
+      @conversation = Conversation.find(params[:conversation_id])
+    end
 
 end
