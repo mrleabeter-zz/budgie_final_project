@@ -18,6 +18,7 @@ Budgie::Application.routes.draw do
     resources :messages
   end 
 
+  resources :messages, only: [:update]
 
   resources :invitations
 
