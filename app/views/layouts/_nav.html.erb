@@ -1,6 +1,6 @@
 <div id="nav-bar">
 
-  <h1>Oh SNAP! It's the nav bar!</h1>
+  <img id="nav-logo" src="" alt="Budgie Logo">
 
   <% if current_user %>
     
@@ -19,8 +19,11 @@
   <% else %>
 
     <div id="sign-in-container">
-      <%= link_to "Sign Up", signup_path %>
-      <%= link_to "Log In", login_path %>
+      <%= form_tag sessions_path do %>
+        <%= text_field_tag 'email', nil, placeholder: 'email' %>
+        <%= password_field_tag 'password', nil, placeholder: 'password' %>
+        <%= submit_tag "Log In" %>
+      <% end %>
     </div>
 
   <% end %>

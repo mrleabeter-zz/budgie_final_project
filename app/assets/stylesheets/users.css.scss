@@ -1,8 +1,3 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-
 /*#discount-form {
   display: none;
 }*/
@@ -22,4 +17,26 @@
 .user-update-form {
   display: none;
   border: 1px solid black;
+}
+
+.about-signup-container {
+  border: 1px solid black;
+  width: 50%;
+  height: 475px;
+  float: left;
+}
+
+#signup-form {
+  display: none;
+}
+
+.beta-mode-container {
+  border: 1px solid black;
+  width: 40%;
+  height: 475px;
+  float: right;
+}
+
+#beta-mode-form {
+  display: none;
 }

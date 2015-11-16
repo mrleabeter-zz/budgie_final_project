@@ -51,4 +51,19 @@ $(document).ready(function() {
     $('.user-update-form').show();
   });
 
+  $(document).on('click', '#signup-button', function() {
+    $('#about-budgie').hide();
+    $('#signup-form').show();
+  });
+
+  $(document).on('click', '#about-button', function() {
+    $('#signup-form').hide();
+    $('#about-budgie').show();
+  });
+
+  $(document).on('click', '#beta-lock', function() {
+    $('#beta-mode-card').hide();
+    $('#beta-mode-form').show();
+  });
+
 });

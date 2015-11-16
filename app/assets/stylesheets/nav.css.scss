@@ -4,22 +4,32 @@
   background: lightgrey;
 }
 
+#nav-logo {
+  position: relative;
+  float: left;
+  height: 80px;
+  width: 80px;
+  top: 10px;
+  left: 10px;
+}
+
 #logged-in-container {
   border: 1px solid black;
   position: relative;
+  float: right;
   text-align: right;
-  width: 200px;
-  left: 850px;
-  top: -25px;
+  top: 10px;
+  right: 10px;
 }
 
 #nav-buttons-container, #sign-in-container {
   border: 1px solid black;
   position: relative;
+  clear: both;
+  float: right;
   text-align: right;
-  width: 250px;
-  left: 800px;
-  top: 10px;
+  bottom: 10px;
+  right: 10px;
 }
 
 .nav-button {
