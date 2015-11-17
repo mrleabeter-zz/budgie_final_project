@@ -1,6 +1,6 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
-  # before_action :set_user
+  # before_action :set_user 
   before_action :set_company
 
  
