@@ -68,7 +68,7 @@
                             <div class="footer">
   
 
-        <button class="btn btn-simple" onclick="rotateCard(this)">
+                        <button class="btn btn-simple" onclick="rotateCard(this)">
                                     <i class="fa fa-mail-forward"></i> Manual Flip
                                 </button>
                             </div>
@@ -76,12 +76,37 @@
                     </div> <!-- end front panel -->
                     <div class="back">
                         <div class="header">
-
+                            <div class="panel panel-default">
+                              <div class="panel-heading clearfix">
+                                <h3 class="panel-title pull-left">Send Message</h3>
+                                <div class="btn-group pull-right">
+                                  <button class="btn btn-danger">
+                                    <i class="fa fa-times"></i>
+                                    Cancel
+                                  </button>
+                                  <button class="btn btn-success">
+                                    <i class="fa fa-check"></i>
+                                    Send
+                                  </button>
+                                </div>
+                              </div>
                         </div> 
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                              </div>
+                              <div class="form-group">
+                                <label class="col-xs-3 control-label">Message</label>
+                                <div class="col-xs-12">
+                                  <textarea class="form-control" rows="6">Message here</textarea>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
                         <div class="content">
                             <div class="main">
-                             
+
                             </div>
+
                         </div>
                         <div class="footer">
                             <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">

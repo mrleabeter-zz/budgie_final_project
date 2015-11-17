@@ -2,6 +2,8 @@ class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
   # before_action :set_user
   before_action :set_company
+
+ 
   # GET /discounts
   # GET /discounts.json
   def index
@@ -9,8 +11,7 @@ class DiscountsController < ApplicationController
     @favorites = @company.favorites
     @users = User.all
     @companies = Company.all
-  end
-
+  end  
   # GET /discounts/1
   # GET /discounts/1.json
   def show
@@ -30,6 +31,7 @@ class DiscountsController < ApplicationController
   # POST /discounts
   # POST /discounts.json
   def create
+
     @company = Company.find_or_create_by(company_name: params[:company][:company_name])
     @discount = Discount.find_or_create_by(id: params[:discount][:id])
 
@@ -87,5 +89,4 @@ class DiscountsController < ApplicationController
     def discount_params
       params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions, company_attributes: [:id, :company_name])
     end
-
 end
