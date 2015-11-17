@@ -1,8 +1,8 @@
 class Discount < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
-
   belongs_to :company
+  acts_as_votable
 
   validates :discount_percent,
               numericality: { only_integer: true},

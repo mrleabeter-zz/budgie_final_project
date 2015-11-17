@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry'
 
+gem 'acts_as_votable', '~> 0.10.0'
+
 gem 'faker'
 
 group :doc do

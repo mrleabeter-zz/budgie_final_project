@@ -2,8 +2,7 @@ class ConversationsController < ApplicationController
 
   def index
    @users = User.all
-   # @conversations = Conversation.where(recipient_id: current_user.id)
-   @conversations = Conversation.sent_or_received_by(current_user).order("updated_at: :desc")
+   @conversations = Conversation.sent_or_received_by(current_user).order(updated_at: :desc)
   end
 
   def create

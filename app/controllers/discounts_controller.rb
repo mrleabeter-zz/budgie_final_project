@@ -89,4 +89,17 @@ class DiscountsController < ApplicationController
     def discount_params
       params.require(:discount).permit(:company_id, :user_id, :discount_percent, :restrictions, company_attributes: [:id, :company_name])
     end
+
+    def upvote 
+      @link = Link.find(params[:id])
+      @link.upvote_by current_user
+      # redirect_to :back
+    end  
+
+    def downvote
+      @link = Link.find(params[:id])
+      @link.downvote_by current_user
+      # redirect_to :back
+    end
+    
 end
