@@ -26,6 +26,23 @@
         <td><%= link_to 'Destroy', [@company, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %></td>
       </tr>
     <% end %>
+
+    <% @discounts.each do |discount| %>
+    <h4><%= link_to link.title, discount %><br>
+      Submitted <%= time_ago_in_words(discount.created_at) %> 
+      by <%= discount.user.email %>
+    </h4>
+        <%= link_to like_link_path(link), method: :put do %>
+            Upvote
+          <%= link.get_upvotes.size %>
+        <% end %>
+
+      <%= link_to dislike_link_path(link), method: :put do %>
+          Downvote
+        <%= link.get_downvotes.size %>
+      <% end %>
+    <% end %>
+
   </tbody>
 </table>
 

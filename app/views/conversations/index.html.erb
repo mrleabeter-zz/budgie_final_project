@@ -3,10 +3,11 @@
  <div class="mailbox list">
   <div class="messages">
   <% @conversations.each do |conversation| %>
-      <ul><% conversation.to_me?(current_user) ? other_person = conversation.sender :   other_person = conversation.recipient %>
-    <li><%= link_to other_person.username, conversation_messages_path(conversation) %> Last message sent at: <%= conversation.last_message.message_time %></li>
-    </ul>
-<!--     <%= conversation.last_message.body %> -->
+    <% if conversation.messages.size > 0 %>
+        <ul><% conversation.to_me?(current_user) ? other_person = conversation.sender : other_person = conversation.recipient %>
+      <li><%= link_to other_person.username, conversation_messages_path(conversation) %> Last message sent at: <%= conversation.last_message.message_time %></li>
+      </ul>
+    <% end %>
    <% end %>
   </div>
  </div>
