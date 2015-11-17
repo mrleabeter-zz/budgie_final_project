@@ -1,17 +1,20 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
-  before_action :set_user
-
+  # before_action :set_user
+  before_action :set_company
   # GET /discounts
   # GET /discounts.json
   def index
-    @discounts = @user.discounts
+    @discounts = @company.discounts
+    @favorites = @company.favorites
+    @users = User.all
+    @companies = Company.all
   end
 
   # GET /discounts/1
   # GET /discounts/1.json
   def show
-    @discount = @user.discounts.find(params[:id])
+    @discount = @company.discounts.find(params[:id])
   end
 
   # GET /discounts/new
@@ -76,8 +79,8 @@ class DiscountsController < ApplicationController
       @discount = Discount.find(params[:id])
     end
 
-    def set_user
-      @user = User.find(params[:user_id])
+    def set_company
+      @company = Company.find(params[:company_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-<h1>Listing discounts</h1>
+<h1>Company Listing discounts</h1>
 
 <table>
   <thead>
@@ -17,12 +17,13 @@
     <% @discounts.each do |discount| %>
       <tr>
         <td><%= discount.company.id %></td>
-        <td><%= discount.user.id %></td>
+        <td><%= discount.company.company_name %></td>
+       <!--  <td><%= discount.user.id %></td> -->
         <td><%= discount.discount_percent %></td>
         <td><%= discount.restrictions %></td>
-        <td><%= link_to 'Show', [@user, discount] %></td>
-        <td><%= link_to 'Edit', [:edit, @user, discount] %></td>
-        <td><%= link_to 'Destroy', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %></td>
+        <td><%= link_to 'Show', [@company, discount] %></td> 
+        <td><%= link_to 'Edit', [:edit, @company, discount] %></td>
+        <td><%= link_to 'Destroy', [@company, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +31,94 @@
 
 <br>
 
-<%= link_to 'New Discount', new_user_discount_path %>
+<%= link_to 'New Discount', new_company_discount_path %>
+
+
+
+
+
+
+<div class="container">
+<div class="row">
+<% @discounts.each do |discount| %>
+ 
+          <div class="col-md-4 col-sm-6">
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <%=image_tag("/rotating_card_thumb.png")%>
+                        </div>
+                        <div class="user">
+                          <%=image_tag(("/rotating_card_profile.png"), class: "img-circle")%>
+                        </div>
+
+                
+
+
+
+
+                        <div class="content">
+                        <div class="main">
+                            <h3 class="name"><%=discount.company.company_name.truncate(16) %></h3> 
+                    <h6 class="name">Discount: <%= discount.discount_percent %> %</h6> 
+                    <h6 class="name">Restrictions: <%= discount.restrictions %></h6>
+          
+                        </div>
+                            <div class="footer">
+  
+
+        <button class="btn btn-simple" onclick="rotateCard(this)">
+                                    <i class="fa fa-mail-forward"></i> Manual Flip
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div class="header">
+
+                        </div> 
+                        <div class="content">
+                            <div class="main">
+                             
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                                <i class="fa fa-reply"></i> Back
+                            </button>
+        
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+        </div> <!-- end col sm 3 -->
+<!--         <div class="col-sm-1"></div> -->
+
+
+<% end %>
+</div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $().ready(function(){
+        $('[rel="tooltip"]').tooltip();
+        
+    });
+    
+    function rotateCard(btn){
+        var $card = $(btn).closest('.card-container');
+        console.log($card);
+        if($card.hasClass('hover')){
+            $card.removeClass('hover');
+        } else {
+            $card.addClass('hover');
+        }
+    }
+</script>
+
+
+
