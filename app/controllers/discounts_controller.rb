@@ -91,9 +91,9 @@ class DiscountsController < ApplicationController
     end
 
     def upvote 
-      @link = Link.find(params[:id])
-      @link.upvote_by current_user
-      # redirect_to :back
+     @link = Link.find(params[:id])
+     @link.upvote_by current_user
+    # redirect_to :back
     end  
 
     def downvote
@@ -101,5 +101,7 @@ class DiscountsController < ApplicationController
       @link.downvote_by current_user
       # redirect_to :back
     end
-    
+
+
+
 end

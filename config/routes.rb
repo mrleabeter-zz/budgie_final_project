@@ -14,16 +14,14 @@ Budgie::Application.routes.draw do
     resources :companies, :discounts, :favorites
   end  
 
+  resources :discounts do
+    resources :messages, :conversations
+  end
+    
   resources :conversations do
-    resources :messages
+      resources :messages  
   end 
 
-  resources :discounts do 
-    member do
-      put "like", to: "links#upvote"
-      put "dislike", to: "links#downvote"
-    end
-  end
 
   resources :messages, only: [:update]
 

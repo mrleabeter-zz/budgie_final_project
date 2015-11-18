@@ -7,12 +7,9 @@
     <div id="logged-in-container">
       <%= current_user.username %>: <%= link_to "Log out", logout_path %>
     </div>
-
     <div id="nav-buttons-container">
-      <a href="/companies"><button class="nav-button">Companies</button></a>
-
+      <a href="/users/<%= current_user.id %>/favorites"><button class="nav-button">Favorites</button></a>
       <a href="/messages"><button class="nav-button">Messages</button></a>
-
       <a href="/users/<%= current_user.id %>"><button>Profile</button></a>
     </div>
     
