@@ -12,7 +12,15 @@ class ConversationsController < ApplicationController
    else
     @conversation = Conversation.create!(conversation_params)
    end
-   redirect_to conversation_messages_path(@conversation)
+
+   if params[:message]
+    @conversation.messages.create(body:params[:message], user_id: params[:sender_id])
+    
+   end 
+
+   @user = User.find(params[:sender_id])
+   redirect_to user_favorites_path(@user)
+   # redirect_to conversation_messages_path(@conversation)
   end
   
   private

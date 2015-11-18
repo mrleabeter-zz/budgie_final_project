@@ -11,6 +11,7 @@ class DiscountsController < ApplicationController
     @favorites = @company.favorites
     @users = User.all
     @companies = Company.all
+    @conversation = Conversation.new
   end  
   # GET /discounts/1
   # GET /discounts/1.json
@@ -83,6 +84,7 @@ class DiscountsController < ApplicationController
 
     def set_company
       @company = Company.find(params[:company_id])
+      # @company = Company.find_by(company_name: params[:company_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

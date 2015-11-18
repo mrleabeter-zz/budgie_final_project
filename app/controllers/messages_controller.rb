@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
     if @message.save
       @conversation.touch
+      # render json: { conversation_id: @conversation.id }
       redirect_to conversation_messages_path(@conversation)
     end
   end

@@ -47,18 +47,15 @@
                         </div>
                         <div class="content">
                             <div class="main">
-                                <h3 class="name"><%= favorite.company.company_name.truncate(16) %></h3>         </div>
+                                <h3 class="name"><%= favorite.company.company_name %></h3> 
+
+                            </div>
                            <div class="footer"> 
-
-                            
-
-                                <button class="btn btn-danger btn-sm" href="#">
-          <%= link_to ' Delete ', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-trash-o fa-md"%>
-        </button>
-        <button class="btn btn-success btn-sm" onclick="rotateCard(this)">
-                                    <i class="fa fa-mail-forward"></i> Manual Flip
-                                </button>
-                                </div>
+                          <button class="btn btn-danger btn-sm" href="#">
+                          <%= link_to ' Delete ', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-trash-o fa-md"%>
+                          </button>
+                          <button class="btn btn-success btn-sm" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i> Manual Flip</button>
+                          </div>
 
                         </div>
                     </div> <!-- end front panel -->
