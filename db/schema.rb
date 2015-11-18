@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20151116231024) do
     t.datetime "updated_at"
   end
 
-  add_index "companies", ["category_id"], name: "index_companies_on_category_id"
+  add_index "companies", ["category_id"], name: "index_companies_on_category_id", using: :btree
 
   create_table "conversations", force: true do |t|
     t.integer  "sender_id"
@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20151116231024) do
     t.datetime "updated_at"
   end
 
-  add_index "discounts", ["category_id"], name: "index_discounts_on_category_id"
-  add_index "discounts", ["company_id"], name: "index_discounts_on_company_id"
-  add_index "discounts", ["user_id"], name: "index_discounts_on_user_id"
+  add_index "discounts", ["category_id"], name: "index_discounts_on_category_id", using: :btree
+  add_index "discounts", ["company_id"], name: "index_discounts_on_company_id", using: :btree
+  add_index "discounts", ["user_id"], name: "index_discounts_on_user_id", using: :btree
 
   create_table "favorites", force: true do |t|
     t.integer  "user_id"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20151116231024) do
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20151116231024) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end
