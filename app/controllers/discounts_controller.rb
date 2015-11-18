@@ -1,7 +1,9 @@
 class DiscountsController < ApplicationController
   before_action :set_discount, only: [:show, :edit, :update, :destroy]
   # before_action :set_user 
-  before_action :set_company
+  before_action :set_company, except: [:create]
+
+
 
  
   # GET /discounts
@@ -84,7 +86,7 @@ class DiscountsController < ApplicationController
 
     def set_company
       @company = Company.find(params[:company_id])
-      # @company = Company.find_by(company_name: params[:company_id])
+      #@company = Company.find_by(company_name: params[:company_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
