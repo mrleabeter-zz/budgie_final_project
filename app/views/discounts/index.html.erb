@@ -1,50 +1,14 @@
-<h1>Company Listing discounts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>User</th>
-      <th>Discount percent</th>
-      <th>Restrictions</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @discounts.each do |discount| %>
-      <tr>
-        <td><%= discount.company.id %></td>
-        <td><%= discount.company.company_name %></td>
-       <!--  <td><%= discount.user.id %></td> -->
-        <td><%= discount.discount_percent %></td>
-        <td><%= discount.restrictions %></td>
-        <td><%= link_to 'Show', [@company, discount] %></td> 
-        <td><%= link_to 'Edit', [:edit, @company, discount] %></td>
-        <td><%= link_to 'Destroy', [@company, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %></td>
-      </tr>
-    <% end %>
-
-
-
-  </tbody>
-</table>
+<br>
+<button class="btn btn-success btn-lg"><h1>Company Discounts <i class="fa fa-usd"></i></h1></button>
 
 <br>
-
-<%= link_to 'New Discount', new_company_discount_path %>
-
-
-
 
 
 
 <div class="container">
 <div class="row">
+<br>
 <% @discounts.each do |discount| %>
- 
           <div class="col-md-4 col-sm-6">
              <div class="card-container manual-flip">
                 <div class="card">
@@ -55,24 +19,20 @@
                         <div class="user">
                           <%=image_tag(("/rotating_card_profile.png"), class: "img-circle")%>
                         </div>
-
-                
-
-
-
-
                         <div class="content">
                         <div class="main">
-                            <h3 class="name"><%=discount.company.company_name.truncate(16) %></h3> 
-                    <h6 class="name">Discount: <%= discount.discount_percent %> %</h6> 
-                    <h6 class="name">Restrictions: <%= discount.restrictions %></h6>
-          
+                        <h3 class="name"><%=discount.company.company_name.truncate(25) %></h3>
+                        <br>
+                        <h4 class="text-center">Discount: <%= discount.discount_percent %> %</h4>
+                        <br>
+                        <h4 class="text-center ct-heart">Restrictions: </h4>
+                        <p class="text-center"><%= discount.restrictions %></p>
                         </div>
                             <div class="footer">
   
 
-                        <button class="btn btn-simple" onclick="rotateCard(this)">
-                                    <i class="fa fa-mail-forward"></i> Manual Flip
+                        <button class="btn btn-success btn-sm" onclick="rotateCard(this)">
+                                    <i class="fa fa-envelope"></i> Send a Message
                                 </button>
                             </div>
                         </div>
@@ -81,16 +41,19 @@
                         <div class="header">
                             <div class="panel panel-default">
                               <div class="panel-heading clearfix">
-                                <h3 class="panel-title pull-left">Send Message</h3>
+                              <button class="btn btn-success btn-md">
+                                    <i class="fa fa-envelope"></i> Send a Message
+                                </button>
+                                <!-- <h3 class="panel-title pull-left">Send Message</h3> -->
                                 <div class="btn-group pull-right">
                                   <button class="btn btn-danger">
                                     <i class="fa fa-times"></i>
                                     Cancel
                                   </button>
-                                  <button class="btn btn-success">
+                                <!--   <button class="btn btn-success">
                                     <i class="fa fa-check"></i>
                                     Send
-                                  </button>
+                                  </button> -->
                                 </div>
                               </div>
                         </div> 

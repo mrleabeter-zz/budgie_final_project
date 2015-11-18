@@ -48,15 +48,18 @@
                         <div class="content">
                             <div class="main">
                                 <h3 class="name"><%= favorite.company.company_name.truncate(16) %></h3>         </div>
-                            <div class="footer">
-                                <button class="btn btn-simple">
-          <%= link_to ' Delete ', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-trash-o"%>
-        </button>
+                           <div class="footer"> 
 
-        <button class="btn btn-simple" onclick="rotateCard(this)">
+                            
+
+                                <button class="btn btn-danger btn-sm" href="#">
+          <%= link_to ' Delete ', user_favorite_path(@user, favorite), method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-trash-o fa-md"%>
+        </button>
+        <button class="btn btn-success btn-sm" onclick="rotateCard(this)">
                                     <i class="fa fa-mail-forward"></i> Manual Flip
                                 </button>
-                            </div>
+                                </div>
+
                         </div>
                     </div> <!-- end front panel -->
                     <div class="back">
@@ -65,10 +68,7 @@
                         </div> 
                         <div class="content">
                             <div class="main">
-                                <h4 class="text-center">Experince</h4>
-                                <p>Mike was working with our team since 2012.</p>
-                                <h4 class="text-center">Areas of Expertise</h4>
-                                <p>Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+                            
                             </div>
                         </div>
                         <div class="footer">
@@ -135,16 +135,11 @@
                             <div class="main">
                                 <h3 class="name"><%= company.company_name.truncate(16) %></h3>
                                
-
-                              <!--   <p class="profession">Web Developer</p> -->
-              <!--                   <h5><i class="fa fa-map-marker fa-fw text-muted"></i> Bucharest, Romania</h5>
-                                <h5><i class="fa fa-building-o fa-fw text-muted"></i> Creative Tim Inc. </h5>
-                                <h5><i class="fa fa-envelope-o fa-fw text-muted"></i> mike@creative-tim.com</h5> -->
                                 
                             </div>
                             <div class="footer"> 
                         <button class="btn btn-simple">
-          <%= link_to 'Favorite', user_favorites_path(@user, company_id: company.id), method: :post , class: "fa fa-heart"%>
+          <%= link_to 'Favorite', user_favorites_path(@user, company_id: company.id), method: :post , class: "fa fa-heart ct-heart"%>
         </button>
                                 
                                 <button class="btn btn-simple" onclick="rotateCard(this)">
@@ -161,10 +156,6 @@
                         </div> 
                         <div class="content">
                             <div class="main">
-                                <h4 class="text-center">Experince</h4>
-                                <p>Mike was working with our team since 2012.</p>
-                                <h4 class="text-center">Areas of Expertise</h4>
-                                <p>Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
                             </div>
                         </div>
                         <div class="footer">
