@@ -49,6 +49,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'carrierwave'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

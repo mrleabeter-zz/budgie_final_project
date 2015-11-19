@@ -80,7 +80,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         :username, :email, :password, :password_confirmation, :city, discounts_attributes: [
           :id, :discount_percent, :restrictions, company_attributes: [
-            :id, :company_name
+            :id, :company_name, :store_pic, :logo
           ]
         ]
       )
@@ -90,6 +90,9 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       @user.save
       @company = Company.find_or_create_by(company_name: params[:company][:company_name])
+
+      # @company.update_attributes(params.require(:company).permit(:company_name, :store_pic, :logo))
+      # @company.save 
     
       @discount = Discount.new(
         user_id: @user.id,

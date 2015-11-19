@@ -8,8 +8,10 @@ class Company < ActiveRecord::Base
   validates :company_name,
              presence: true
 
+  mount_uploader :logo, ImageUploader 
+  mount_uploader :store_pic, ImageUploader                    
+
   scope :with_discounts, -> { includes(discounts: :user)
   .where.not(users: { id: nil})
   .where.not(discounts: { id: nil }) }
-
 end

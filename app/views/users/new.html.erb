@@ -49,10 +49,28 @@
         <%= user_form.text_field :city %>
       </div>
       
-      <%= fields_for(@company) do |co| %>
+      <%= fields_for @company, :html => {:multipart => true} do |co| %>
         <div class="field">
           <%= co.label :company_name %><br>
           <%= co.text_field :company_name %>
+        </div>
+
+        <div class="field">
+          <%= co.label :logo %><br>
+          <%= co.text_field :logo %>
+        </div>
+
+        <div>
+          <%= co.file_field :logo %>
+        </div>
+
+        <div class="field">
+          <%= co.label :store_pic %><br>
+          <%= co.text_field :store_pic %>
+        </div>
+
+        <div>
+          <%= co.file_field :store_pic %>
         </div>
       <% end %>
 
