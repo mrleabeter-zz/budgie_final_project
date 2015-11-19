@@ -1,5 +1,6 @@
 Budgie::Application.routes.draw do
-  get 'signup', to: 'users#new', as: 'signup'
+  root 'users#new'
+  # get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   get 'messages', to: 'conversations#index', as: 'messages'
@@ -30,6 +31,6 @@ Budgie::Application.routes.draw do
   resources :users, only: [:new, :create]
 
   resources :sessions, only: [:new, :create, :destroy]
-  root to: 'users#index'
+  # root to: 'users#index'
 
 end

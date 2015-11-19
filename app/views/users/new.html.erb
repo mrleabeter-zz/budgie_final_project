@@ -1,14 +1,19 @@
-<h1>Discount Sharing</h1>
+<!-- <h1>Discount Sharing</h1> -->
+
+
 
 <div class="about-signup-container">
   <div id="about-budgie">
-    <h1>Cheep is Cheap!</h1>
-    <p>Budgie is a place where you can access a long list of employee discounts in your area.<br/>All you've got to do in exchance, is share your employee discount with the community!</p>
-    <button id="signup-button">Sign Up Free!</button>
+<!--     <div style="margin: 45px; color:white;">  -->
+    <div id="about_signup_text"> 
+      <h2 >Cheep is Cheap!</h2>
+      <p>Budgie is a place where you can access a long list of employee discounts in your area.<br><br>All you've got to do in exchance, is share your employee discount with the community!</p>
+      <button type="button" class="btn btn-custom btn-sm" id="signup-button">Sign Up Free!</button>
+    </div> 
   </div>
 
-  <div id="signup-form">
-    <button id="about-button">About Us</button>
+  <div id="signup-form1">
+<!--     <button id="about-button">About Us</button> -->
     <%= form_for(@user) do |user_form| %>
       <%= user_form.hidden_field :invitation_token %>
 
@@ -43,6 +48,9 @@
         <%= user_form.label :password_confirmation %><br>
         <%= user_form.password_field :password_confirmation %>
       </div>
+      </div>
+
+      <div id="signup-form2">
 
       <div class="field">
         <%= user_form.label :city %><br>
@@ -72,21 +80,27 @@
             </div>
           </div>
         </div>
+        
 
         
       <% end %>
-      <div class="actions">
-        <%= user_form.submit %>
-      </div>
+      <div class="actions" style="margin-top: 10px;">
+        <button type="button" class="btn btn-custom btn-sm">Sumbit</button>
+<!--         <%= user_form.submit %>
+ -->      </div>
     <% end %>
   </div>
 </div>
 
+
 <div class="beta-mode-container">
   <div id="beta-mode-card">
-    <h1>Sign up for our beta version...</h1>
-    <img id="beta-lock" src="" alt="Lock Image">
-    <h1>And start saving!</h1>
+<!--     <div style="margin: 15px; color:white;"> 
+ -->     <div id="beta-text">
+        <h2 id="beta-lock">Sign up for our beta version...</h2>
+<!--       <img id="beta-lock" src="" alt=""> -->
+      <h3>And start saving!</h3>
+    </div>
   </div>
 
   <div id="beta-mode-form">
@@ -95,7 +109,8 @@
     <%= form_for Invitation.new do |f| %>
         <%= f.label :recipient_email, "Your Email:" %>
         <%= f.text_field :recipient_email %>
-        <%= f.submit 'Submit' %>
+        <button type="button" class="btn btn-custom btn-sm">Submit</button></a>
+<!--         <%= f.submit 'Submit' %> -->
     <% end %> 
   </div>
 </div>

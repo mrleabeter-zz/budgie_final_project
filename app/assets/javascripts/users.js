@@ -53,7 +53,8 @@ $(document).ready(function() {
 
   $(document).on('click', '#signup-button', function() {
     $('#about-budgie').hide();
-    $('#signup-form').show();
+    $('#signup-form1').show();
+    $('#signup-form2').show();
   });
 
   $(document).on('click', '#about-button', function() {

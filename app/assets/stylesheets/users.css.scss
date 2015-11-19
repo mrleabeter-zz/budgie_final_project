@@ -2,6 +2,21 @@
   display: none;
 }*/
 
+body {
+    background-image: url('http://s20.postimg.org/if39l602l/ruler.jpg');
+/*  background-image: url('http://s3.postimg.org/5addrjblv/shoppingmall_2.jpg');*/
+    background-color: #2D2948;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/*body {
+  background: -webkit-linear-gradient(#55D6C9, #72D6DA); 
+  background: -o-linear-gradient(#55D6C9, #72D6DA); 
+  background: -moz-linear-gradient(#55D6C9, #72D6DA); 
+  background: linear-gradient(#55D6C9, #72D6DA);
+}
+*/
 .user-discount-card {
   display: inline-block;
   margin: 5px;
@@ -20,23 +35,76 @@
 }
 
 .about-signup-container {
-  border: 1px solid black;
-  width: 50%;
-  height: 475px;
+  background-image: url('http://s20.postimg.org/uv9mprp3x/signup3.jpg');
+  background-repeat:no-repeat;
+  background-size: cover;
+background-position:center;
+  background-color: #71DC27;
+/*  border: 1px solid black;*/
+  width: 60%;
+  height: 400px;
   float: left;
+  position: relative;
+  margin-top: 15px;
+/*  margin-right: 18px;*/
+  margin-bottom: 15px;
 }
 
-#signup-form {
+#signup-form1 {
+  float: left;
   display: none;
+  color: white;
+  margin-top: 40px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+#signup-form2 {
+  position: relative;
+  display: none;
+  color: white;
+  margin-top: 40px;
+  margin-left: 45px;
+  margin-right: 45px;
 }
 
 .beta-mode-container {
-  border: 1px solid black;
+  background-image: url('http://s20.postimg.org/yswwf6bx9/lock_bck4.jpg');
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position:center;
+/*  background-repeat: no-repeat;
+  background-position: center;*/
+  background-color: #55DAD5;
+/*  border: 1px solid black;*/
   width: 40%;
-  height: 475px;
-  float: right;
+  height: 400px;
+  float: left;
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #beta-mode-form {
   display: none;
+  color: white;
+  margin-top: 100px;
+  margin-left: 45px;
+  margin-right: 45px; 
+}
+
+#about_signup_text {
+  font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
+  color: white;
+  margin-top: 120px;
+  margin-left: 45px;
+  margin-right: 45px; 
+}
+
+#beta-text {
+  font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
+  color: white;
+  margin-top: 120px;
+  margin-left: 75px;
+  margin-right: 45px; 
 }

@@ -1,10 +1,10 @@
-<h1>Listing favorites</h1>
+<h4 style="color: white">FAVORITES</h4>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Company</th>
+<!--       <th>User</th>
+      <th>Company</th> -->
       <th></th>
       <th></th>
       <th></th>
@@ -27,10 +27,9 @@
 
 <br>
 
-<%= link_to 'New Favorite', new_user_favorite_path(@user) %>
+<%= link_to 'New Favorite', new_user_favorite_path(@user), style: "color: white" %>
 
 
-<div class="container">
 <div class="row">
 <% @favorites.each do |favorite| %>
  
@@ -90,7 +89,6 @@
 
 <% end %>
 </div>
-</div>
 
 <script type="text/javascript">
     $().ready(function(){
@@ -110,9 +108,8 @@
 </script>
 
 
-<h1>Listing companies</h1>
+<p style="color: white; margin-top: 10px">Select a company</p>
 
-<div class="container">
 <div class="row">
 <% @companies.each do |company| %>
  
@@ -175,7 +172,6 @@
    
 </div>
 <% end %>
-</div>
 </div>
 
 
