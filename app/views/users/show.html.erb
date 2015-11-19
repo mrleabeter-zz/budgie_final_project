@@ -8,12 +8,224 @@ $(document).ready(function() {
 </script>
 
 
+<!--  -->
+<!--  -->
 
-<p id="notice"><%= notice %></p>
+<div class="container" >
+<div class="row">
+<% @user.discounts.each do |discount| %>
+ 
+          <div class="col-md-4 col-sm-6" id="discount-<%=discount.id%>">
+          
+             <div class="card-container manual-flip">
+                <div class="card">
+                    <div class="front">
+                        <div class="cover">
+                            <%=image_tag("/rotating_card_thumb.png")%>
+                        </div>
+                        <div class="user">
+                          <%=image_tag(("/rotating_card_profile.png"), class: "img-circle")%>
+                        </div>
+                        <div class="content">
+                            <div class="main" id="discount-<%=discount.id%>">
+                                <h3 class="name"><%= discount.company.company_name%></h3> 
+                                
+                                <h4 class="text-center"><%= discount.discount_percent %>% Discount</h4>
+                             
+                                <h4 class="text-center ct-heart">Restrictions: </h4>
+                              <h6 class="text-center"><% discount.restrictions.split("\n").each do |restriction|%></h5> 
+                                <h6 class="text-center"><li><%= restriction %></li></h5>
+                                <h6 class="text-center"><% end %></h6>
+                                <!-- end here -->
+                              
+                          
+                            </div>
+                           <div class="footer"> 
+                          <button class="btn btn-danger btn-sm" href="#">
+                          <%= link_to ' Delete ', [@user, discount], method: :delete, data: { confirm: 'Are you sure you would like to delete this discount?' }, class: "fa fa-trash-o fa-md"%>
+                          </button>
+                          <button class="btn btn-success btn-sm" onclick="rotateCard(this)"><i class="fa fa-mail-forward"></i> Update</button>
+                          </div>
+                          <!-- end here -->
 
-<div id="user-discounts">
+                        </div>
+                    </div> <!-- end front panel -->
+                  
+                    <div class="back">
+                        <div class="header">
+                        <div class="panel panel-default">
+                         <div class="panel-heading clearfix">
+   <button class="btn btn-danger btn-sm update-discount-button" data-id="<%= discount.id %>">Update</button>
 
-  <% @user.discounts.each do |discount| %>
+                        </div> 
+                        </div>
+                        </div>
+                        <div class="content">
+                            <div class="main">
+
+    <div class="panel panel-default user-discount-form">
+   
+
+    <%= form_for([@user, @discount], :html => {:id => 'discount-form'}) do |discount_form| %>
+
+      <%= discount_form.hidden_field(:id) %>
+
+      <%= fields_for(@company) do |co| %>
+    <div class="modal-body">
+    <form class="form-horizontal">
+      
+          <%= co.label :company_name %>
+          <%= co.text_field :company_name %>
+      
+      <% end %>
+
+      <div class="input-field">
+        <%= discount_form.label :discount_percent %>
+        <%= discount_form.text_field :discount_percent %>
+      </div>
+
+      <div class="input-field" id="restrictions">
+        <%= discount_form.label :restrictions %>
+        <div class="restriction-wrapper">
+          <div class="restriction-fields">
+            <input type="text" name="restriction[]" value=""/>
+
+            <a href="javascript:void(0);" class="add-restriction" title="Add Restriction">+</a>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="actions">
+          <%= discount_form.submit "Save" %>
+      </div>
+      </form>
+      </div>
+    <% end %>
+  
+  </div>
+
+
+
+                            
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+                                <i class="fa fa-reply"></i> Back
+                            </button>
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> 
+
+            <!-- end card-container -->
+            
+        </div> <!-- end col sm 3 -->
+<!--         <div class="col-sm-1"></div> -->
+
+
+<!--  -->
+<!--  -->
+
+
+<div class="col-md-4 col-sm-6">
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">User Profile Updates</h3>
+      <a class="btn btn-default pull-right" href="#">
+        <i class="fa fa-check"></i>
+        Button
+      </a>
+  </div>
+  <div class="panel-body">
+
+<div id="user-details-window">
+  <div id="user-details">
+    <p>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Password:</strong>
+      <%= @user.password %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @user.city %>
+    </p>
+
+    <button id="user-update-button">Update</button>
+  </div>
+
+  <div class="user-update-form">
+    <%= render 'form' %>
+  </div>
+  
+
+</div>
+
+
+
+
+
+  </div>
+  <div class="panel-footer">
+   <button id="user-update-button">Update</button>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!--  -->
+<!--  -->
+
+
+<% end %>
+</div>
+</div>
+
+<script type="text/javascript">
+    $().ready(function(){
+        $('[rel="tooltip"]').tooltip();
+        
+    });
+    
+    function rotateCard(btn){
+        var $card = $(btn).closest('.card-container');
+        console.log($card);
+        if($card.hasClass('hover')){
+            $card.removeClass('hover');
+        } else {
+            $card.addClass('hover');
+        }
+    }
+</script>
+
+
+
+
+
+
+
+<!-- <p id="notice"><%= notice %></p>
+
+<div id="user-discounts"> -->
+
+<!--   <% @user.discounts.each do |discount| %>
 
     <div class="user-discount-card" id="discount-<%=discount.id%>">
       <h3><%= discount.company.company_name %></h3>
@@ -27,9 +239,9 @@ $(document).ready(function() {
       <%= button_to 'Delete', [@user, discount], data: { confirm: 'Are you sure you would like to delete this discount?' },method: :delete %>
     </div>
 
-  <% end %>
+  <% end %> -->
 
-  <div class="user-discount-card user-discount-form">
+<!--   <div class="user-discount-card user-discount-form">
     <%= form_for([@user, @discount], :html => {:id => 'discount-form'}) do |discount_form| %>
 
       <%= discount_form.hidden_field(:id) %>
@@ -65,9 +277,9 @@ $(document).ready(function() {
     <% end %>
   
   </div>
-</div>
+</div> -->
 
-<div id="user-details-window">
+<!-- <div id="user-details-window">
   <div id="user-details">
     <p>
       <strong>Username:</strong>
@@ -96,4 +308,10 @@ $(document).ready(function() {
     <%= render 'form' %>
   </div>
   
-</div>
+
+</div> -->
+
+
+
+
+

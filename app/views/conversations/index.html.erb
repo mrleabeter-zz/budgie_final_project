@@ -1,3 +1,40 @@
+
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Mailbox</h1>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr class="active success"><th>Recipient</th><th>Message Details</th></tr>
+      </thead>
+      <tbody>
+        <% @conversations.each do |conversation| %>
+    <% if conversation.messages.size > 0 %>
+        <ul><% conversation.to_me?(current_user) ? other_person = conversation.sender : other_person = conversation.recipient %>
+      <tr><td><li><%= link_to other_person.username, conversation_messages_path(conversation) %></li></td><td> Last message sent at: <li><%= conversation.last_message.message_time %></li></td></tr>
+      </ul>
+    <% end %>
+   <% end %>
+      
+      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+   
+  </div>
+</div>
+
+
+
+
+
+
+<!-- 
+
 <div class="mailbox">
  <h3>Mailbox</h3>
  <div class="mailbox list">
@@ -25,3 +62,6 @@
  <% end %>
  </div>
 </div>
+
+
+ -->
