@@ -132,13 +132,16 @@ $(document).ready(function() {
 <div class="col-md-4 col-sm-6">
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">User Profile Updates</h3>
-      <a class="btn btn-default pull-right" href="#">
+    <h3 class="panel-title pull-left">User Profile Update</h3>
+    <!--   <a class="btn btn-default pull-right" href="#">
         <i class="fa fa-check"></i>
         Button
-      </a>
+      </a> -->
   </div>
+
   <div class="panel-body">
+   <div class="modal-body">
+    <form class="form-horizontal">
 
 <div id="user-details-window">
   <div id="user-details">
@@ -162,13 +165,14 @@ $(document).ready(function() {
       <%= @user.city %>
     </p>
 
-    <button id="user-update-button">Update</button>
+   <!--  <button id="user-update-button">Update</button> -->
   </div>
 
-  <div class="user-update-form">
+  <div class="panel panel-default user-update-form">
     <%= render 'form' %>
   </div>
-  
+  </form>
+  </div>
 
 </div>
 

@@ -1,30 +1,79 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Mailbox</h1>
+  </div>
+  
+<!--   <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr class="active success"><th>Recipient</th><th>Message Details</th></tr>
+      </thead>
+      <tbody>
+    </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+   
+  </div> -->
+
+
+
 <% if @over_ten %>
  <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
-<div class="ui segment">
+<!-- <div class="ui segment"> -->
+ <div class="table-responsive">
+    <table class="table table-hover">
   <% @messages.each do |message| %>
     <% if message.body %>
       <% user = User.find(message.user_id) %>
-      <div class="item">
+<!--       <div class="item">
         <div class="content">
-          <div class="header">
-            <strong><%= user.username %></strong>     
-            <%= message.message_time %>
-            <span data-message-id="<%= message.id %>" class="<%= message.message_read? %>">
-              <%= message.message_read? %>
-            </span> 
-          </div>
-          <div class="list">
-            <div class="item">
+          <div class="header"> -->
+   </table>
+  </div>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+  <div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr class="active "><th>Message Date/Time</th><th>Message Status</th><th></th></tr>
+        </thead>
+          <tbody>
+    
+            <tr><!-- <td></td> --><td><%= message.message_time %>
+            </td><td><data-message-id="<%= message.id %>" class="<%= message.message_read? %>"><%= message.message_read? %></td></tr>
+        <thead>
+        <tr class="active "><th>Message Details</th><th></th><th></th></tr>
+        
+            <tr><td><%= message.body %></td></tr>
+        </thead>
+        
+          </tbody>
+    </table>
+  </div>
+  </div>
+  </div>
+         <!--  <!-- <div class="list"> -->
+          <!--   <div class="item">
               <i class="right triangle icon"></i>
               <%= message.body %>
+            </div> -->
+ <!--      </tbody>
+    </table>
+  </div>
+  </div>
+  </div> -->
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     <% end %>
   <% end %>
 </div>
+
+</div> 
+
 <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
  <div class="field">
    <%= f.text_area :body, class: "form-control", placeholder: "Type your message"%>
@@ -34,3 +83,12 @@
    <%= f.submit "Message", class: "ui blue labeled submit icon button" %>
  </div>
 <% end %>
+
+</div>
+<!--      </tbody>
+    </table>
+  </div>
+  <div class="panel-footer">
+   
+  </div> -->
+<!-- </div> -->
