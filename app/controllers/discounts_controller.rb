@@ -34,7 +34,6 @@ class DiscountsController < ApplicationController
   # POST /discounts
   # POST /discounts.json
   def create
-
     @company = Company.find_or_create_by(company_name: params[:company][:company_name])
     @discount = Discount.find_or_create_by(id: params[:discount][:id])
 
@@ -45,7 +44,7 @@ class DiscountsController < ApplicationController
 
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to user_path(@user), notice: 'Discount was successfully created.' }
+        format.html { redirect_to user_path(current_user)}
         format.json { render action: 'show', status: :created, location: @discount }
       else
         format.html { render action: 'new' }
