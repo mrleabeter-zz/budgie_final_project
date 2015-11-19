@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to companies_path, notice: "Welcome back, #{user.username}!"
+      redirect_to user_favorites_path(user.id), notice: "Welcome back, #{user.username}!"
     else
       flash.now[:alert] = "Username or password is incorrect. Please try again."
       render :new
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to users_path, notice: "Goodbye!"
+    redirect_to new_user_path, notice: "Goodbye!"
   end
     
 end
